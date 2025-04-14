@@ -1,0 +1,6 @@
+framework module AraeliumUpdate {
+  umbrella header "AraeliumUpdate.h"
+  export *
+
+  module * { export * }
+}

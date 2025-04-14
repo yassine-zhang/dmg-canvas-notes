@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width initial-scale=1"/>
+	<title>Code Signing</title>
+	
+	
+	
+	
+	<link rel="stylesheet" href="../css/main.css"/>
+	
+	<script src="../nav.js"></script>
+	
+</head>
+
+	<body class="help-page">
+		<header class="banner">
+	
+	<nav id="menu" class="dynamic">
+		
+		
+		<ul>
+		
+			
+				
+				<li>
+					<a href="../English.lproj/introduction.html"><nav>Introduction</nav></a>
+				</li>
+				
+			
+		
+			
+				
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Window</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/contents.html"><nav>Adding Files</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/background.html"><nav>Window Background</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/window_height.html"><nav>Finder Window Height</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Disk Image</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/format.html"><nav>Disk Image Options</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/licenses.html"><nav>License Agreements</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Deployment</nav></a>
+					<ul name="list">
+					
+						<li class="active">
+							<a href="../English.lproj/code_signing.html"><nav>Code Signing</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/notarization.html"><nav>Notarization</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Advanced</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/command_line.html"><nav>Command Line Tool</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+		</ul>
+	</nav>
+</header>
+
+		<main>
+			<h1>Code Signing</h1>
+
+<h2 id="code-signing">Code Signing</h2>
+
+<p>Starting in macOS Sierra, disk images can be code signed to verify the integrity of their contents. When a disk image is not code signed, macOS’s Gatekeeper will launch applications bundled inside the disk image from a virtual randomized path, which prevents certain attack vectors for maliciously crafted application resources. Applications inside of disk images which have been properly code signed are not subject to this launch path randomization. To learn more about this security issue, see the WWDC 2016 session 706 “What’s New in Security” and Technote 2206.</p>
+
+<h3 id="install-the-certificate">Install the Certificate</h3>
+
+<p>To code sign your disk image, you’ll need to have a “Developer ID Application” certificate from Apple, installed with Keychain Access.</p>
+
+<ol>
+  <li>Log into your developer account</li>
+  <li>create the Developer ID Application certificate</li>
+  <li>Download the certificate</li>
+  <li>Double-click the certificate in Finder to install it with Keychain Access</li>
+</ol>
+
+<p>In the DMG Canvas application Settings, you will see a list of code signing certificates available for DMG Canvas to use. You can use the refresh button to have DMG Canvas scan for installed certificates again.</p>
+
+<h3 id="set-a-disk-image-to-be-code-signed">Set a Disk Image to be Code Signed</h3>
+
+<ol>
+  <li>In a DMG Canvas document, select the Disk Image at the top of the sidebar.</li>
+  <li>Select one of the Code Sign options in the “Gatekeeper” setting.</li>
+  <li>Select the Developer ID Application certificate from the certificates popup.</li>
+</ol>
+
+<p>DMG Canvas will then code sign and verify the disk image for you, notifying you if there’s an error. That’s all there is to it.</p>
+
+<ul>
+  <li>Note that code-signed disk images should also be notarized to open on macOS 10.15 Catalina and later.</li>
+</ul>
+
+<hr />
+
+<h2 id="why-you-should-code-sign-your-disk-image">Why You Should Code Sign Your Disk Image</h2>
+
+<p>Known as <em>the repackaging problem</em>, a bad actor can repackage your app bundle with a different, potentially malicious version of the external-to-your-app-bundle resources, and distribute the altered disk image as if it came from you. If your application then loads this extra content at runtime, because the extra code is outside the app bundle and thus not covered by the app’s code signature, you can’t be certain that the extra content is unmodified and secure. This is a security risk.</p>
+
+<p>To combat this problem, beginning in macOS 10.12 Sierra, when an app is launched from a read-only disk image, the operating system employs Gatekeeper path randomization. The system copies the app to a random location in the file system before executing it, invalidating any relative paths that the app uses to access unprotected content outside its own app bundle.</p>
+
+<p>You can bypass path randomization by code signing your disk image before you distribute it. When launching an app from a code-signed disk image, Gatekeeper disables path randomization because all the contents of the disk image are covered by a code signature.</p>
+
+<ul>
+  <li>
+    <p>Whether or not Gatekeeper employs path randomization, it still evaluates an app and its code signature on first launch as usual. In other words, even when you distribute an app using a signed disk image, you still separately sign your app bundle in the usual way, before adding it to the disk image.</p>
+  </li>
+  <li>
+    <p>Also note that code-signed disk images should also be notarized to open on macOS 10.15 Catalina and later.</p>
+  </li>
+</ul>
+
+
+		</main>
+		
+<footer>
+</footer>
+
+	</body>
+	
+</html>

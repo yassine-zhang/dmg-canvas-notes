@@ -1,0 +1,63 @@
+{
+  "diskImage" : {
+    "autoopen" : true,
+    "background" : {
+      "image" : "backgroundImage",
+      "imageScaleOption" : 100,
+      "layoutObjects" : [
+
+      ],
+      "type" : 0
+    },
+    "defaultLicenseLanguage" : "Chinese - Simplified",
+    "iconPreviewVisible" : false,
+    "iconSize" : 71,
+    "itemInfoVisible" : false,
+    "labelPosition" : 0,
+    "licenses" : [
+      {
+        "agreeButtonTitle" : "同意",
+        "disagreeButtonTitle" : "不同意",
+        "language" : "Chinese - Simplified",
+        "printButtonTitle" : "打印",
+        "prompt" : "如果您同意本许可协议的条款，请按“同意”来安装此软件。如果您不同意，请按“不同意”。",
+        "saveButtonTitle" : "存储⋯",
+        "systemLanguageID" : 52
+      }
+    ],
+    "nameFontSize" : 12,
+    "statusBarVisible" : false,
+    "suggestedDiskImageName" : "Alcove for mac 1.2.5.dmg",
+    "toolbarVisible" : false,
+    "uid" : "hjzkrfyrbz",
+    "validationScheme" : 0,
+    "viewLayout" : 0,
+    "volumeIcon" : "volumeIcon",
+    "volumeName" : "Alcove for mac 1.2.5",
+    "volumeSize" : 0,
+    "volumeSizeOption" : "Automatic",
+    "windowContentHeight" : 360,
+    "windowContents" : [
+      {
+        "filePath" : "\/Applications",
+        "iconSize" : 100,
+        "invisible" : false,
+        "isAnAlias" : true,
+        "location" : "{424, 180}",
+        "relativeFilePath" : "..\/..\/..\/..\/..\/..\/Applications"
+      },
+      {
+        "filePath" : "\/Users\/mac\/Projects\/www\/dmg-canvas-notes\/assets\/app\/Alcove.app",
+        "iconSize" : 100,
+        "invisible" : false,
+        "isAnAlias" : false,
+        "location" : "{174, 180}",
+        "relativeFilePath" : "..\/assets\/app\/Alcove.app"
+      }
+    ],
+    "windowContentWidth" : 600,
+    "windowLeft" : 200,
+    "windowTop" : 120
+  },
+  "version" : 4
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="bootstrap.css" charset="utf-8" />
+	<title>DMG Canvas Release Notes</title>
+	<style>
+		
+		h1 {
+			text-align: left;
+			font-family: -apple-system, "Helvetica Neue", Helvetica, Arial;
+			font-size: 18px;
+			font-weight: 500;
+			color: black;
+			line-height: 18px;
+			margin-bottom: 15px;
+			margin-top: 10px;
+		}
+		
+		
+		#feature-briefs h3 {
+		    text-align: center;
+		    margin-bottom: 20px;
+		    margin-top: 20px;
+		    color: #3b88b6;
+		    font-weight:600;
+			font-size: 20px;
+		}
+
+		#feature-briefs .release {
+		    margin-bottom: 5em;
+		}
+		
+		#feature-briefs .release > .title {
+		    margin-bottom: 1em
+		}
+
+		#feature-briefs .release > p {
+		    margin-bottom:1.5em
+		}
+		
+		#feature-briefs .release > ul {
+		    margin-bottom:1.5em
+		}
+		
+		#feature-briefs .release > ul > li {
+		    margin-bottom: 0.35em;
+		}
+
+		#feature-briefs .release > p.title {
+		    font-size: 110%;
+		    font-weight: bold;
+		    margin-bottom: 0.4em
+		}
+		
+		.badge {
+			margin-right: 0.5em;
+		}
+		.badge-success {
+			background-color: #5cb85c;
+		}
+		
+		h3 .build {
+			font-weight: 400;
+			font-size: 13px;
+		}
+		
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<h1>DMG Canvas Release Notes</h1>
+</div>
+
+
+
+<div id="feature-briefs">
+	<div class="container">
+		
+		<div class="release">
+			<h3>Version 4.1.2<br><span class="build">February 21, 2025 - Build 401005</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Fixes an issue with "Build and Pause" not working with APFS disk images because of an ejection error.</p>
+			<p>Fixes the grid color preference not applying correctly.</p>
+			<p>When choosing a different file—using the File Info sidebar—for an existing file item inside of the DMG Canvas window, it will now show the new file's size properly.</p>
+			<p>When setting the dmg to Don't Codesign or Notarize, it will remove any existing identities from the document so they're not still saved in the file (even though building did not use them).</p>
+			<p>Fixes and issue when building a disk image when the volume name contained some Unicode characters would fail.</p>
+			<p>Adds additional details to the build log in the case of some errors.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.1.1<br><span class="build">October 28, 2024 - Build 401001</span></h3>
+			
+			<p class="title">Fixes</p>
+			<p>Stops the new warning regarding disallowed aliases from showing up unexpectedly.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.1<br><span class="build">October 23, 2024 - Build 401000</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Supports building macOS `.pkg` installer packages using the Package Builder companion application.</p>
+			<p>Added new warnings about aliases to /Library/... folders as macOS generally disallows drag-and-drop onto them now.</p>
+			<p>Adds "Show in Finder" and "Open" menu items to the contextual menu when right clicking on files in the layout view.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.9<br><span class="build">May 23, 2024 - Build 400033</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Fixes an issue in version 4.0.8 with the in-app updater.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.8<br><span class="build">May 21, 2024 - Build 400032</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Works around an issue caused by a bug in macOS 14.5 which could cause the dmgcanvas command line tool to crash.</p>
+			<p>The dmgcanvas command line tool can be used to register DMG Canvas.</p>
+			<p>New application icon.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.7<br><span class="build">November 2, 2023 - Build 400028</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Fixes an issue with overriding notarization settings from the command line.</p>
+			<p>Updated to address visual problems caused by changes in macOS Sonoma.</p>
+			<p>Notarization using the dmgcanvas command line tool can use an App Store Connect API key instead of an app-specific password.</p>
+			<p>Added the 'identities' verb to the dmgcanvas command to list usable code signing identities.</p>
+			<p>altool support removed entirely now that Apple has discontinued the service.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.6<br><span class="build">June 29, 2023 - Build 400026</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>If a particular macOS permissions error occurs when building a disk image, the fix (turning on Full Disk Access) is now suggested.</p>
+			<p>AppleID setup trims whitespace from the password etc to avoid possible copy & paste errors leading to authentication failures later on.</p>
+			<p>More error information is shown from some commands during the building process if they fail. (Such as uploading for notarization.)</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.5<br><span class="build">May 30, 2023 - Build 400020</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Improved build log formatting for errors during notarization.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.4<br><span class="build">May 24, 2023 - Build 400019</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Fixes the Build & Pause menu item in the toolbar actually doing a Build & Finalize.
+</p>
+			<p>Provides a more helpful error message if DMG Canvas encounters a permissions issue when copying files into the disk image. Full Disk Access permissions may be required.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.3<br><span class="build">February 20, 2023 - Build 400018</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>Fixes an issue where the build could sometimes appear to be frozen waiting on notarization.</p>
+			<p>Fixes some rare edge case incompatibilities with v3 documents.</p>
+			<p>Solves a background text alignment issue (swapping and center- and right-aligned) depending on the computer's CPU architecture. A subtle change on Apple's part caused this. You may need to check your documents now have the correct setting selected, but going forward there will be no issue.</p>
+			<p>When using an image with greater than 144 DPI, DMG Canvas now scales that down to 144 as is appropriate for interface usage, and so that the 0.5/1/2x settings are still logical.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.2<br><span class="build">January 29, 2023 - Build 400014</span></h3>
+			
+			<p class="title">Changes</p>
+			<p>A dmgcanvas document now has better portability between machines when using notarization.</p>
+			<p>Adds warnings when opening a document where an image file or license agreement RTF file is missing. When building with the command line, warnings are treated as errors.</p>
+			<p>Addresses a crash caused by a bug in macOS 11.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0.1<br><span class="build">January 25, 2023 - Build 400011</span></h3>
+			
+			<p class="title">Fixes</p>
+			<p>Contains a few fixes for minor interface issues and stability.</p>
+		</div>
+		
+		<div class="release">
+			<h3>Version 4.0<br><span class="build">January 24, 2023 - Build 400007</span></h3>
+		
+			<p class="title"><span class="badge badge-success">New!</span> Xcode Integration</p>
+			<p>Generate an Xcode Post-Archive build script to automatically build your disk image.</p>
+	
+			<p class="title"><span class="badge badge-success">New!</span> All-New Interface</p>
+			<ul>
+				<li>An all-new interface that is much more modern and usable.</li>
+				<li>An all-new Build Log view, showing the most recent build.</li>
+				<li>View all DMG file contents in the sidebar.</li>
+				<li>All-new Disk Image view with Summary for an overview of options and macOS version compatibility.</li>
+			</ul>
+			
+			<p class="title"><span class="badge badge-success">New!</span> Design View Improvements</p>
+			<ul>
+				<li>View all background layout objects (text and images) in the sidebar.</li>
+				<li>Files hidden from Finder are hidden in the design view and shown in the sidebar.</li>
+				<li>Improved handling of images for Retina-ready design.</li>
+				<li>Updated design view metrics for accurate display of appearance in macOS 13.</li>
+			</ul>
+
+			<p class="title"><span class="badge badge-success">New!</span> Building</p>
+			<ul>
+				<li>Uses the new Apple service for notarization. Note that the Notarization process in DMG Canvas 3 is being deprecated by Apple and will cease to work in late 2023.</li>
+				<li>An all-new Build Log view, showing the most recent build.</li>
+				<li>A more detailed build log with more error information if encountered.</li>
+				<li>New options to select dmg compression formats (LZFSE, LZMA, bzip2, etc)</li>
+				<li>Defaults to APFS and LZFSE, for modern disk image distribution with fast decompression and mounting.</li>
+			</ul>
+			
+			<p class="title"><span class="badge badge-success">New!</span> Misc</p>
+			<ul>
+				<li>Supports building disk images with Shortcuts.</li>
+				<li>Uses a new human-readable document format which is better suited to being included in version control systems.</li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+	
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+framework module AraeliumAppKit {
+  umbrella header "AraeliumAppKit.h"
+  export *
+
+  module * { export * }
+}

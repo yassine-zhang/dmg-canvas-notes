@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width initial-scale=1"/>
+	<title>Command Line Tool</title>
+	
+	
+	
+	
+	<link rel="stylesheet" href="../css/main.css"/>
+	
+	<script src="../nav.js"></script>
+	
+</head>
+
+	<body class="help-page">
+		<header class="banner">
+	
+	<nav id="menu" class="dynamic">
+		
+		
+		<ul>
+		
+			
+				
+				<li>
+					<a href="../English.lproj/introduction.html"><nav>Introduction</nav></a>
+				</li>
+				
+			
+		
+			
+				
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Window</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/contents.html"><nav>Adding Files</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/background.html"><nav>Window Background</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/window_height.html"><nav>Finder Window Height</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Disk Image</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/format.html"><nav>Disk Image Options</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/licenses.html"><nav>License Agreements</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Deployment</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/code_signing.html"><nav>Code Signing</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/notarization.html"><nav>Notarization</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Advanced</nav></a>
+					<ul name="list">
+					
+						<li class="active">
+							<a href="../English.lproj/command_line.html"><nav>Command Line Tool</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+		</ul>
+	</nav>
+</header>
+
+		<main>
+			<h1>Command Line Tool</h1>
+
+<h2 id="command-line-tool">Command Line Tool</h2>
+
+<p>The dmgcanvas command line tool allows you to build disk images from DMG Canvas documents using the command line. With scripting, you can use dmgcanvas to automate your disk image workflow.</p>
+
+<p>To install and use dmgcanvas, select the “dmgcanvas Tool” menu item from the “DMG Canvas” application menu, then select the location from the popup below where you would like the symbolic link pointing to dmgcanvas to be created in and click the “Create Link” button.</p>
+
+<p>For the latest documentation, execute the dmgcanvas tool with no arguments.
+Usage:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ dmgcanvas [verb] &lt;pathToTemplate&gt; &lt;pathToDestinationDiskImage&gt; [options]
+
+Verbs:
+    build
+        Builds a partial disk image ('Build and Pause')
+    finalize
+        Finalizes a partial disk image
+    (none)
+        Builds a complete finalized disk image.
+        
+Options:
+    -v &lt;name&gt; 
+    -volume &lt;name&gt; 
+    -volumeName &lt;name&gt; 
+        Sets the name of the mounted volume in Finder
+    -volumeIcon &lt;path&gt; 
+    -identity &lt;code signing identity&gt; 
+        The disk image will be code signed with a certificate with the given identity,
+        overriding any identity specified in the template.
+        Note that macOS 10.15 Catalina requires the dmg also be notarized to open.
+    -notarizationAppleID &lt;appleid&gt; 
+        When provided, the disk image will be uploaded to Apple for Notarization.
+        Note that notarization requires the disk image be code signed.
+    -notarizationPassword &lt;password&gt; 
+        The App-Specific Password that can be used for Notarization with the Apple ID.
+        See https://support.apple.com/en-us/HT204397  
+    -notarizationASCProvider &lt;asc-provider&gt; 
+    -notarizationPrimaryBundleID &lt;primary-bundle-id&gt;  
+        Include the primary-bundle-id flag—which is required—to specify an identifier
+        that helps you keep track of automated correspondence from the notarization
+        service. The value you give doesn’t need to match the bundle identifier of the
+        submitted app or have any particular value. It only needs to make sense to you.
+        The notarization service includes the value whenever it emails you regarding
+        the given notarization submission.  
+    -backgroundImage &lt;path&gt; 
+    -setFilePath &lt;file name&gt; &lt;new file path&gt; 
+        Sets the file path for a file (given by name) which is in the template document.
+        dmgcanvas will copy the file at the given path into the disk image instead of
+        the path used when creating the document. The name of the file in the disk image
+        will be that of the file at the specified file path, not the name as shown in the
+        disk image template. This workflow can sometimes be than relying on relative or
+        absolute paths specified when the template is made.
+    -setTextString &lt;textObjectIdentifier&gt; &lt;new string&gt; 
+        Sets the string in an existing text object in the disk image's background.
+</code></pre></div></div>
+
+
+		</main>
+		
+<footer>
+</footer>
+
+	</body>
+	
+</html>

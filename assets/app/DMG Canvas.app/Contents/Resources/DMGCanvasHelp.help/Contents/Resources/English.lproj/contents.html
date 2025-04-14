@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width initial-scale=1"/>
+	<title>Adding Files</title>
+	
+	
+	
+	
+	<link rel="stylesheet" href="../css/main.css"/>
+	
+	<script src="../nav.js"></script>
+	
+</head>
+
+	<body class="help-page">
+		<header class="banner">
+	
+	<nav id="menu" class="dynamic">
+		
+		
+		<ul>
+		
+			
+				
+				<li>
+					<a href="../English.lproj/introduction.html"><nav>Introduction</nav></a>
+				</li>
+				
+			
+		
+			
+				
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Window</nav></a>
+					<ul name="list">
+					
+						<li class="active">
+							<a href="../English.lproj/contents.html"><nav>Adding Files</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/background.html"><nav>Window Background</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/window_height.html"><nav>Finder Window Height</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Disk Image</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/format.html"><nav>Disk Image Options</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/licenses.html"><nav>License Agreements</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Deployment</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/code_signing.html"><nav>Code Signing</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/notarization.html"><nav>Notarization</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Advanced</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/command_line.html"><nav>Command Line Tool</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+		</ul>
+	</nav>
+</header>
+
+		<main>
+			<h1>Adding Files</h1>
+
+<h2 id="disk-file-contents">Disk File Contents</h2>
+
+<p>The Contents view shows the preview of what the Finder window will look like when the disk image is mounted. The window size, location, file icon sizes, and various other settings are specified using the sidebar on the right side of the window.</p>
+
+<p><img src="imgs/app_contents.png" alt="" /></p>
+
+<p>Adding files to a disk image is extremely simple using DMG Canvas, and you have multiple ways to do it.</p>
+
+<ol>
+  <li>Simply drag and drop the files into the Contents view to have DMG Canvas copy those files to the disk image when the disk image is built.</li>
+  <li>Use the Add menu in the toolbar</li>
+  <li>Drag the item into the Contents section of the sidebar.</li>
+</ol>
+
+<p>To create an alias to a file or folder, simply hold Control while dropping the file into the view.</p>
+
+<p><img src="imgs/add_files.png" alt="" /></p>
+
+<h3 id="building-disk-images">Building Disk Images</h3>
+
+<p>When you add files to the document in DMG Canvas, instead of the files being copied into the document, both absolute and relative file paths to the files stored. (Relative paths use the document’s parent folder as the root location.) This way, when you build a disk image using either DMG Canvas.app or the dmgcanvas command line tool, the latest versions of the files referenced are used.</p>
+
+<p>When DMG Canvas looks for a file to copy into the disk image being built, it first uses the relative path to find the file. If a file does not exist at the location, it looks for it at the absolute path. By taking advantage of relative paths, you can use one set of files to create the DMG Canvas document, and move the document to another location or even another machine and use an entirely different set of files to create the disk image. As long as the relative location between the files and the document are the same, it’ll work seamlessly.</p>
+
+
+		</main>
+		
+<footer>
+</footer>
+
+	</body>
+	
+</html>

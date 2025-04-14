@@ -1,0 +1,6 @@
+framework module AraeliumFoundation {
+  umbrella header "AraeliumFoundation.h"
+  export *
+
+  module * { export * }
+}

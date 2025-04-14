@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width initial-scale=1"/>
+	<title>Notarization</title>
+	
+	
+	
+	
+	<link rel="stylesheet" href="../css/main.css"/>
+	
+	<script src="../nav.js"></script>
+	
+</head>
+
+	<body class="help-page">
+		<header class="banner">
+	
+	<nav id="menu" class="dynamic">
+		
+		
+		<ul>
+		
+			
+				
+				<li>
+					<a href="../English.lproj/introduction.html"><nav>Introduction</nav></a>
+				</li>
+				
+			
+		
+			
+				
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Window</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/contents.html"><nav>Adding Files</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/background.html"><nav>Window Background</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/window_height.html"><nav>Finder Window Height</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Disk Image</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/format.html"><nav>Disk Image Options</nav></a>
+						</li>
+					
+						<li>
+							<a href="../English.lproj/licenses.html"><nav>License Agreements</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Deployment</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/code_signing.html"><nav>Code Signing</nav></a>
+						</li>
+					
+						<li class="active">
+							<a href="../English.lproj/notarization.html"><nav>Notarization</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+			
+				
+				<li class="group">
+					<a name="name"><nav>Advanced</nav></a>
+					<ul name="list">
+					
+						<li>
+							<a href="../English.lproj/command_line.html"><nav>Command Line Tool</nav></a>
+						</li>
+					
+					</ul>
+				</li>
+			
+		
+		</ul>
+	</nav>
+</header>
+
+		<main>
+			<h1>Notarization</h1>
+
+<h2 id="notarization">Notarization</h2>
+
+<p>Starting in macOS Catalina, all disk images which are code signed, are also required to be “notarized” by Apple in order to be opened by end-users. Without notarization, the user will see an error that the identity and source of the disk image cannot be verified so it cannot be opened. Disk images which are not code signed, are not required to be notarized, and are able to be opened on Catalina with the caveat of having Gatekeeper path randomization enabled for applications in the disk image.</p>
+
+<p><strong>To notarize your disk image, you must have an Apple developer account and have the Xcode command line tools installed.</strong></p>
+
+<ul>
+  <li>In DMG Canvas’s application Settings under Notarization, add an Apple ID developer account.
+    <ul>
+      <li>You must set up an App-Specific password to use with Notarization for the account.</li>
+    </ul>
+  </li>
+  <li>Select the disk image in the document sidebar, and in the Gatekeeper setting turn on “Code Sign and Notarize”</li>
+  <li>Select the code signing certificate to use.</li>
+  <li>Select the Apple ID to use for Notarization.</li>
+</ul>
+
+<p>During the build process, DMG Canvas will upload the disk image to Apple for notarization, and then wait for the Apple to finish notarizing the disk image. This process can take several minutes. Once notarization is complete, the disk image will be stapled with a ticket and is ready for distribution.</p>
+
+<p>If you choose to “Stop Waiting” for notarization to finish after the upload has completed, you will need to manually check for the notarization status (with the <code class="language-plaintext highlighter-rouge">notarytool</code> command) and if notarization is successful, you will need to manually staple the ticket to the disk image:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcrun stapler staple /path/to/diskimage.dmg
+</code></pre></div></div>
+
+<hr />
+
+<p>An <strong>App-Specific Password</strong> is required for Notarization because Two-Factor Authentication cannot be used. See <a href="https://support.apple.com/en-us/HT204397">https://support.apple.com/en-us/HT204397</a> for how to set up a password.</p>
+
+<p>The <strong>Team ID</strong> is an Apple-assigned value that designates which Apple developer team to use with notarization, for the given Apple ID. You can find your Team ID (or Team IDs) when logging into your Apple developer account, and looking at your membership details.</p>
+
+
+		</main>
+		
+<footer>
+</footer>
+
+	</body>
+	
+</html>

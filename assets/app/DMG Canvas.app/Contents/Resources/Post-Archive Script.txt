@@ -1,0 +1,143 @@
+# ===================================================================
+# INPUT PARAMETERS -- Edit these
+# ===================================================================
+
+# Your Apple Developer "Team ID" to use when exporting
+EXPORT_TEAM_ID="&&&teamID&&&"
+EXPORT_DEVELOPER_ID_CERT_NAME="&&&certificate&&&"
+
+# The name of the generated disk image.
+# If you use a either CFBundleVersion or CFBundleShortVersionString,
+# in the name (you can use either), keep the string wrapped in single
+# quotes.
+BUILT_DMG_NAME='&&&dmgFileName&&&'
+
+# Path to the DMG Canvas document file
+#    If it's in your Xcode project folder:
+#      DMG_TEMPLATE_PATH="$SRCROOT/DiskImage.dmgcanvas"
+#    Or use a manually-specified path
+#      DMG_TEMPLATE_PATH="~/Desktop/DiskImage.dmgcanvas"
+DMG_TEMPLATE_PATH="&&&dmgTemplatePath&&&"
+
+# The file with this name, inside your DMG Canvas template, will get
+# replaced with your Xcode build product (which is named $FULL_PRODUCT_NAME).
+# In this example, they both have the same name:
+FILE_NAME_IN_DMG_TEMPLATE="&&&fileNameInDMGTemplate&&&"
+
+# Use this file if it exists. See below.
+EXPORT_OPTIONS_PLIST_PATH="$SRCROOT/ExportOptions.plist"
+
+
+
+# ===================================================================
+# DMG Canvas Xcode Post-Archive Script
+# ===================================================================
+
+# Create a unique folder for the build products.
+# The app will be exported from the archive into this folder. 
+EXPORT_UUID=`uuidgen`
+EXPORT_PATH="/tmp/$PRODUCT_NAME-$EXPORT_UUID/"
+EXPORT_LOG_FILE_PATH="$EXPORT_PATH/post-archive-script.log"
+mkdir -p "$EXPORT_PATH"
+if [ $? -ne 0 ] 
+then
+    echo "Creating the export directory failed"
+    osascript -e 'display notification "Creating export directory failed." with title "DMG Canvas Xcode Post-Archive Script"'
+    exit -1
+fi
+
+# Xcode does not display the output or errors of Archive scripts
+# in the build log, so direct the output to a log file instead.
+exec > $EXPORT_LOG_FILE_PATH 2>&1
+
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Running dmgcanvas \"Archive\" post-action script..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "\n\n\n"
+
+
+# 
+# Exporting the application from Xcode requires an options file
+# Use this default generated file, OR copy the ExportOptions.plist
+# file from a previous "manual" export from Xcode and place it in
+# your Xcode project's root folder.
+# 
+if test -f "$EXPORT_OPTIONS_PLIST_PATH" ; then
+  echo "• Using existing ExportOptions.plist file"
+else
+  echo "• Using default generated ExportOptions.plist file"
+  EXPORT_OPTIONS_PLIST_PATH="$EXPORT_PATH/ExportOptions.plist"
+  cat >"$EXPORT_OPTIONS_PLIST_PATH" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>destination</key>
+	<string>export</string>
+	<key>method</key>
+	<string>developer-id</string>
+	<key>signingCertificate</key>
+	<string>${EXPORT_DEVELOPER_ID_CERT_NAME}</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>teamID</key>
+	<string>${EXPORT_TEAM_ID}</string>
+</dict>
+</plist>
+EOF
+    if [ $? -ne 0 ] 
+    then
+        echo "Writing out the ExportOptions.plist failed"
+        osascript -e 'display notification "Writing out the ExportOptions.plist failed." with title "DMG Canvas Xcode Post-Archive Script"'
+        open "$EXPORT_LOG_FILE_PATH"
+        exit -2
+    fi
+fi
+
+
+
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Exporting from Xcode archive..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+/usr/bin/xcodebuild -exportArchive -archivePath "$ARCHIVE_PATH" -exportPath "$EXPORT_PATH" -exportOptionsPlist "$EXPORT_PATH/ExportOptions.plist" 
+if [ $? -ne 0 ] 
+then
+    echo "Exporting from Xcode failed"
+    osascript -e 'display notification "Exporting from Xcode failed." with title "DMG Canvas Xcode Post-Archive Script"'
+    open "$EXPORT_LOG_FILE_PATH"
+    exit -3
+fi
+echo "\n\n\n"
+
+
+# Get the version numbers which we can use in the dmg file name
+CFBundleVersion=`/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "${EXPORT_PATH}${INFOPLIST_PATH}"`
+CFBundleShortVersionString=`/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "${EXPORT_PATH}${INFOPLIST_PATH}"`
+
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Building the disk image with dmgcanvas..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+BUILT_DMG_PATH=$(eval echo "$EXPORT_PATH/$BUILT_DMG_NAME")
+dmgcanvas "$DMG_TEMPLATE_PATH" "$BUILT_DMG_PATH" -setFilePath "$FILE_NAME_IN_DMG_TEMPLATE" "$EXPORT_PATH/$FULL_PRODUCT_NAME"
+if [ $? -ne 0 ] 
+then
+    echo "Building the disk image with dmgcanvas failed."
+    osascript -e 'display notification "Building the disk image with dmgcanvas failed." with title "DMG Canvas Xcode Post-Archive Script"'
+    open "$EXPORT_LOG_FILE_PATH"
+    exit -4
+fi
+
+echo ""
+echo ""
+echo ""
+echo "$BUILT_DMG_PATH"
+echo "Done!"
+
+
+# Reveal the built dmg
+open "$EXPORT_PATH"
+afplay /System/Library/Sounds/Glass.aiff
+osascript -e 'display notification "Built Disk Image" with title "DMG Canvas Xcode Post-Archive Script"'
